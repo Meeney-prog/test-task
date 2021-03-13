@@ -34,7 +34,7 @@ public class InitLoader implements ApplicationRunner {
     private final RepositoryInterface<String> bodyTypeRepository;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args){
         var brands = externalCarsApiService.loadAllBrands()
                 .stream()
                 .collect(Collectors.toMap(ExternalBrand::getId, e -> e));

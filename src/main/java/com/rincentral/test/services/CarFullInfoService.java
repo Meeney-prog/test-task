@@ -6,14 +6,11 @@ import com.rincentral.test.models.CarInfo;
 import com.rincentral.test.models.params.CarRequestParameters;
 import com.rincentral.test.models.params.MaxSpeedRequestParameters;
 import com.rincentral.test.repositories.RepositoryInterface;
-import com.rincentral.test.utils.validator.CarRequestParamValidator;
-import com.rincentral.test.utils.validator.MaxSpeedParamValidator;
 import com.rincentral.test.utils.validator.RequestValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;

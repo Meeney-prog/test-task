@@ -1,8 +1,8 @@
 package com.rincentral.test.services;
 
-import com.rincentral.test.utils.HelperPage;
 import com.rincentral.test.models.external.ExternalBrand;
 import com.rincentral.test.models.external.ExternalCar;
+import com.rincentral.test.utils.HelperPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.ParameterizedTypeReference;
@@ -20,8 +20,14 @@ import java.util.List;
 public class ExternalCarsApiServicePaginationBased extends ExternalCarsApiService {
     private static final Logger LOGGER = LogManager.getLogger(ExternalCarsApiService.class);
 
-    private static final String ALL_CARS_URL = "http://localhost:8084/api/v1/cars/paged?size=20&page=";
-    private static final String ALL_BRANDS_URL = "http://localhost:8084/api/v1/brands/paged?size=20&page=";
+    private static final int DEFAULT_SIZE = 20;
+
+    private static final String ALL_CARS_URL = String.format(
+            "http://localhost:8084/api/v1/cars/paged?size=%d&page=", DEFAULT_SIZE);
+
+    private static final String ALL_BRANDS_URL = String.format(
+            "http://localhost:8084/api/v1/brands/paged?size=%d&page=", DEFAULT_SIZE);
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
@@ -48,7 +54,7 @@ public class ExternalCarsApiServicePaginationBased extends ExternalCarsApiServic
             } while (response.getBody().hasNext());
             return result;
         } catch (RestClientException | NullPointerException e) {
-            LOGGER.error("Error when trying to load page", e);
+            LOGGER.error("Error when trying to load page: " + url + page, e);
             return Collections.emptyList();
         }
     }
